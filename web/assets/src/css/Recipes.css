@@ -1,0 +1,25 @@
+body {
+    background-color: #151717 !important;
+}
+
+.nav {
+    background-color: #202225;
+    margin-bottom: 10px;
+}
+
+.card {
+    background-color: #323539 !important;
+}
+
+.recipes-block {
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.recipe {
+    color: #ffffff;
+}
+
+.recipe a button{
+    color: #1e7e34;
+}

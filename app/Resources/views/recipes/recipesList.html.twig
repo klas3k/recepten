@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <div class="recipes-block">
+        <div class="row">
+            {% for recipe in recipes %}
+                <div class="col-sm-6 col-md-4 text-center card recipe">
+                    Naam van gerecht : {{ recipe.name }}<br>
+                    Ingredients : {{ recipe.ingredients }}<br>
+                    Hoe bereid je dit : {{ recipe.prepDesc }}<br>
+                    Hoe lang duurt het om te maken : {{ recipe.prepTime }} {% if recipe.prepTime == 1 %}Minuut{% else %}Minuten{% endif %}<br>
+                    Aantal likes : {{ recipe.amountLikes }}<br>
+                    <div class="row">
+                        {% if category is not null %}
+                        <a class="col-6" href="{{ path('recipe_name_like', {'name': category,'id': recipe.id}) }}"><button class="btn">Like</button> </a>
+                        {% else %}
+                        <a class="col-6" href="{{ path('recipe_like', {'id': recipe.id}) }}"><button class="btn">Like</button> </a>
+                        {% endif %}
+                        <a class="col-6" href="{{ path('recipe_edit', {'id': recipe.id}) }}"><button class="btn">Wijzig</button> </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
