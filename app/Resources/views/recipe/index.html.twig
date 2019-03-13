@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Recipes list</h1>
+    <h1>{{ category|capitalize }}</h1>
 
     <table class="table">
         <thead>
@@ -19,8 +19,8 @@
                 <td>{{ recipe.ingredients }}</td>
                 <td>{{ recipe.preperation }}</td>
                 <td>{{ recipe.time|date('H:i:s') }}</td>
-                <td><a href="{{ path('recipe_like', { 'id': recipe.id }) }}">+</a>{{ recipe.likes }}<a href="{{ path('recipe_dislike', { 'id': recipe.id }) }}">-</a></td>
-                <td><a href="{{ path('recipe_edit', { 'id': recipe.id }) }}">Edit</a></td>
+                <td><a href="{{ path('recipe_like', { 'id': recipe.id, 'category': category }) }}">+</a>{{ recipe.likes }}<a href="{{ path('recipe_dislike', { 'id': recipe.id, 'category': category }) }}">-</a></td>
+                <td><a href="{{ path('recipe_edit', { 'id': recipe.id, 'category': category }) }}">Edit</a></td>
             </tr>
         {% endfor %}
         </tbody>

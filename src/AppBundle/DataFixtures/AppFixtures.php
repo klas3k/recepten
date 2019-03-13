@@ -29,9 +29,9 @@ class AppFixtures extends Fixture
         $manager->persist($category);
         array_push($categories, $category);
 
-        $category4 = new Category();
-        $category4->setName('snack');
-        $manager->persist($category4);
+        $category = new Category();
+        $category->setName('snack');
+        $manager->persist($category);
         array_push($categories, $category);
 
         for ($i = 0; $i < 20; $i++) {

@@ -44,7 +44,8 @@ class CategoryController extends Controller
         $recipes = $em->getRepository('AppBundle:Recipe')->findBy(["category" => $category]);
 
         return $this->render('recipe/index.html.twig', [
-            'recipes' => $recipes,
+            'category' => $category->getName(),
+            'recipes'  => $recipes,
         ]);
     }
 }

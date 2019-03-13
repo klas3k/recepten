@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Recipe;
+use AppBundle\Entity\Category;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -27,7 +28,8 @@ class RecipeController extends Controller
         $recipes = $em->getRepository('AppBundle:Recipe')->findAll();
 
         return $this->render('recipe/index.html.twig', [
-            'recipes' => $recipes,
+            'category' => 'all',
+            'recipes'  => $recipes,
         ]);
     }
 
@@ -44,6 +46,7 @@ class RecipeController extends Controller
         $em->persist($recipe);
         $em->flush();
 
+        if($request->query->get('category') === 'all') return $this->redirectToRoute('recepies_index');
         return $this->redirectToRoute('recepies_show', ['name' => $recipe->getCategory()]);
     }
 
@@ -60,6 +63,7 @@ class RecipeController extends Controller
         $em->persist($recipe);
         $em->flush();
 
+        if($request->query->get('category') === 'all') return $this->redirectToRoute('recepies_index');
         return $this->redirectToRoute('recepies_show', ['name' => $recipe->getCategory()]);
     }
 
@@ -77,12 +81,13 @@ class RecipeController extends Controller
         if ($editForm->isSubmitted() && $editForm->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('recipe_edit', ['id' => $recipe->getId()]);
+            if($request->query->get('category') === 'all') return $this->redirectToRoute('recepies_index');
+            return $this->redirectToRoute('recepies_show', ['name' => $request->query->get('category')]);
         }
 
         return $this->render('recipe/edit.html.twig', [
-            'recipe'      => $recipe,
-            'edit_form'   => $editForm->createView(),
+            'recipe' => $recipe,
+            'form'   => $editForm->createView(),
         ]);
     }
 }
